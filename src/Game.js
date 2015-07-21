@@ -1,5 +1,5 @@
 var Game = function(firstFrame) {
-  this.frameRecord = [firstFrame];
+  this.frameRecord = [firstFrame]; // why not have the frameRecord hold 10 frames from the beginning
 };
 
 Game.prototype.overallScore = function(frame) {
@@ -38,7 +38,7 @@ Game.prototype.bonusForSpare = function(first_argument) {
 
 Game.prototype.bonusForStrike = function(first_argument) {
   if (this.previousFrame() && this.previousFrame().isStrike()) {
-    var bonus = this.currentFrame().scoreRecord.slice(0,2);
+    var bonus = this.currentFrame().scoreRecord.slice(0,2); // breaking encapsulation here
     this.previousFrame().bonusRecord = this.previousFrame().bonusRecord.concat(bonus);
   };
 };

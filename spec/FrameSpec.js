@@ -1,5 +1,4 @@
 describe('Frame', function() {
-  
   var frame;
   
   beforeEach(function() {
@@ -67,8 +66,8 @@ describe('Frame', function() {
       expect(frame.totalBonus()).toEqual(0);
     });
 
-    it('is additive the score record array ', function() {
-      frame.bonusRecord.push(5);
+    it('is additive the score record array', function() { // not sure what you mean 'additive'
+      frame.bonusRecord.push(5); // breaking encapsulation here. Have a function that provides a public interface to the bonusRecord array
       frame.bonusRecord.push(5);
       expect(frame.totalBonus()).toEqual(10);
     });

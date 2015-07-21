@@ -5,7 +5,7 @@ describe('Game', function() {
   
   beforeEach(function() {
     frame1 = new Frame();
-    game = new Game(frame1);
+    game   = new Game(frame1); // consider using spies rather than actual frame objects here
   });
 
   it('knows the current frame', function() {
@@ -15,7 +15,7 @@ describe('Game', function() {
   it('knows the previous frame', function() {
     frame2 = new Frame();
     frame3 = new Frame();
-    game.frameRecord.push(frame2, frame3);
+    game.frameRecord.push(frame2, frame3); // breaking encapsulation
     expect(game.previousFrame()).toEqual(frame2);
   });
 
