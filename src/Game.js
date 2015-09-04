@@ -30,20 +30,20 @@ Game.prototype.calculateBonuses = function() {
   };
 };
 
-Game.prototype.bonusForSpare = function(first_argument) {
+Game.prototype.bonusForSpare = function() {
   if (this.previousFrame() && this.previousFrame().isSpare()) {
     this.previousFrame().bonusRecord.push(this.currentFrame().scoreRecord[0]);
   };
 };
 
-Game.prototype.bonusForStrike = function(first_argument) {
+Game.prototype.bonusForStrike = function() {
   if (this.previousFrame() && this.previousFrame().isStrike()) {
     var bonus = this.currentFrame().scoreRecord.slice(0,2);
     this.previousFrame().bonusRecord = this.previousFrame().bonusRecord.concat(bonus);
   };
 };
 
-Game.prototype.bonusForStrikeStrike = function(first_argument) {
+Game.prototype.bonusForStrikeStrike = function() {
   if (this.frameBeforeLast() && this.frameBeforeLast().isStrike() && this.frameBeforeLast().bonusRecord.length != 2) {
     this.frameBeforeLast().bonusRecord.push(this.currentFrame().scoreRecord[0]);
   };
@@ -64,9 +64,5 @@ Game.prototype.frameBeforeLast = function() {
     return this.frameRecord.slice(-3)[0];
   };
 };
-
-// Calculate bonuses and the methods it calls only work when the frame is complete. They/it mus
-// be called before the new frame method.
-// Currently, these methods could be run multiple times if user is interacting with the naked code (exploit).
 
 

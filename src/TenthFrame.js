@@ -52,11 +52,11 @@ TenthFrame.prototype.isInProgress = function() {
   return (this.rollsRemaining > 0);
 };
 
-TenthFrame.prototype.isStrike = function(first_argument) {
+TenthFrame.prototype.isStrike = function() {
   return (this.scoreRecord[0] == 10);
 };
 
-TenthFrame.prototype.isSpare = function(first_argument) {
+TenthFrame.prototype.isSpare = function() {
   if (this.scoreRecord.length == 0) {return false};
 
   var total = this.scoreRecord.slice(0,2).reduce(function(first, second){

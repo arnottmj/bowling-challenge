@@ -14,75 +14,53 @@ $(document).ready(function() {
   var frameArray = [frame1, frame2, frame3, frame4, frame5, frame6, frame7, frame8, frame9, frame10];
 
   var selector = 0;
+  var data = '';
 
   var game = new Game(frameArray[selector]);
 
-  var content = '';
+  var content = [];
+  $("#score").show();
+  $("#frame").hide();
+  $("#game").hide();
+
 
   showField();
 
   function showField() { 
     if (game.isComplete()) {
-      $("#primary").html('The game is complete!');
+      $("#score").hide();
+      $("#game").show();
     } 
     else if (game.currentFrame().isInProgress()) {
-      // var primary   = document.getElementById("primary");
-      // while (primary.firstChild) {
-      //   primary.removeChild(primary.firstChild);
-      // };
-      $("#primary").html(generateScoreEntry());
-      generateScoreEntry();
+      $("#frame").hide();
+      $("#score").show();
     } 
     else {
-      $("#primary").html(generateNextFrame());
+      $("#score").hide();
+      $("#frame").show();
     };
   }
 
-  function generateScoreEntry() { 
-    return ' \
-      Enter Score: <input id="inputscore" type="text"> \
-      <button id="submitscore" type="button">Enter</button>';
-  };
-
-  // function generateScoreEntry() {
-  //   var primary   = document.getElementById("primary"),
-  //       node      = document.createTextNode('Enter Score: '),
-  //       input     = document.createElement('input'),
-  //       button    = document.createElement('button');
-
-  //   button.type  = 'button';
-  //   button.value = 'Enter';
-  //   button.id    = 'submitscore';
-  //   input.type   = 'text';
-  //   input.id     = 'inputscore';
-      
-  //   primary.appendChild(node);
-  //   primary.appendChild(input);
-  //   primary.appendChild(button);
-  // };
-
-  function generateNextFrame() { 
-    return ' \
-    <p>The frame is complete!</p> \
-    <button id="nextframe" type="button">Next Frame</button>';
-  };
-
   function generateTable() { 
-    content += '(Frame ' + (selector + 1).toString() +') ';
+    
     game.frameRecord.forEach(function(frame){
-      content += 'First Roll: ' + game.currentFrame().scoreRecord[0].toString() + ', ';
+      data += '(Frame ' + (selector + 1).toString() +') ';
 
+      data += 'First Roll: ' + game.currentFrame().scoreRecord[0].toString() + ', ';
+      debugger;
       if (game.currentFrame().scoreRecord[1]) {
-        content += 'Second Roll: ' + game.currentFrame().scoreRecord[1].toString() + ', ';
+        data += 'Second Roll: ' + game.currentFrame().scoreRecord[1].toString() + ', ';
       };
 
       if (game.currentFrame().scoreRecord[2]) {
-        content += 'Third Roll: ' + game.currentFrame().scoreRecord[2].toString() + ', ';
+        data += 'Third Roll: ' + game.currentFrame().scoreRecord[2].toString() + ', ';
       };
 
-      content += 'Total score with bonus: ' + game.currentFrame().totalScoreWithBonus().toString() + '<br>';
+      data += 'Total score with bonus: ' + game.currentFrame().totalScoreWithBonus().toString() + '<br>';
     });
-    $("#scoring").html(content);
+
+    content.push(data);
+    $("#table").html(data);
   };
 
 
